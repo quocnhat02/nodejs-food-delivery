@@ -19,5 +19,8 @@
   "homepage": "https://github.com/quocnhat02/nodejs-bootcamp#readme",
   "dependencies": {
     "slugify": "^1.6.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
   }
 }
