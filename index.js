@@ -63,7 +63,7 @@ const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, "utf-8");
 const dataObj = JSON.parse(data);
 
 const server = http.createServer((req, res) => {
-  const pathName = req.url;
+  const { query, pathName } = url.parse(req.url, true);
 
   //   Overview page
   if (pathName === "/" || pathName === "/overview") {
