@@ -39,6 +39,11 @@ const replaceTemplate = (temp, product) => {
   output = output.replace(/{%QUANTITY%}/g, product.quantity);
   output = output.replace(/{%DESCRIPTION%}/g, product.description);
   output = output.replace(/{%ID%}/g, product.id);
+
+  if (!product.organic) {
+    output = output.replace(/{%NOT_ORGANIC%}/g, "not-organic");
+  }
+  return output;
 };
 
 const tempOverview = fs.readFileSync(
@@ -64,9 +69,12 @@ const server = http.createServer((req, res) => {
   if (pathName === "/" || pathName === "/overview") {
     res.writeHead(200, { "Content-type": "text/html" });
 
-    const cardsHtml = dataObj.map((el) => replaceTemplate(tempCard, el));
+    const cardsHtml = dataObj
+      .map((el) => replaceTemplate(tempCard, el))
+      .join("");
+    const output = tempOverview.replace("{%PRODUCT_CARDS%}", cardsHtml);
 
-    res.end(tempOverview);
+    res.end(output);
 
     // Product page
   } else if (pathName === "/product") {
