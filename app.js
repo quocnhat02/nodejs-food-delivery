@@ -3,6 +3,13 @@ const express = require('express');
 
 const app = express();
 
+app.use(express.json());
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
+
 // app.get('/', (req, res) => {
 //   res
 //     .status(200)
@@ -26,6 +33,8 @@ app.get('/api/v1/tours', (req, res) => {
     },
   });
 });
+
+app.post('/api/v1/tours', (req, res) => {});
 
 const port = 4000;
 app.listen(port, () => {
