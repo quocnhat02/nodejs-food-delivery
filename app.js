@@ -93,5 +93,5 @@ app.patch('/api/v1/tours/:id', (req, res) => {
 
 const port = 4000;
 app.listen(port, () => {
-  console.log(`App running on port ${port}...`);
+  console.log(`App running on port ${port}`);
 });
