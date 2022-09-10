@@ -34,9 +34,7 @@ const getAllTours = (req, res) => {
   });
 };
 
-app.get('/api/v1/tours', getAllTours);
-
-app.get('/api/v1/tours/:id', (req, res) => {
+const getTour = (req, res) => {
   console.log(req.params);
 
   const id = req.params.id * 1;
@@ -54,7 +52,10 @@ app.get('/api/v1/tours/:id', (req, res) => {
       tour,
     },
   });
-});
+};
+
+app.get('/api/v1/tours', getAllTours);
+app.get('/api/v1/tours/:id', getTour);
 
 app.post('/api/v1/tours', (req, res) => {
   //   console.log(req.body);
