@@ -86,7 +86,7 @@ const updateTour = (req, res) => {
   res.status(200).json({
     status: 'success',
     data: {
-      tour: '<Updated tour here...></Updated>',
+      tour: '<Updated tour here...>',
     },
   });
 };
