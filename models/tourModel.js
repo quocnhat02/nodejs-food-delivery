@@ -42,6 +42,10 @@ const tourSchema = new mongoose.Schema({
     trim: true,
     required: [true, 'A tour must have a description'],
   },
+  imageCover: {
+    type: String,
+    required: [true, 'A tour must have a cover image'],
+  },
 });
 
 const Tour = mongoose.model('Tour', tourSchema);
