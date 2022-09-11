@@ -6,13 +6,17 @@ const tourSchema = new mongoose.Schema({
     required: [true, 'A tour must have a name'],
     unique: true,
   },
+  duration: {
+    type: Number,
+    required: [true, 'A tour must have a duration'],
+  },
   rating: {
     type: Number,
     default: 4.5,
   },
   price: {
     type: Number,
-    required: [true, 'A tour must have a name'],
+    required: [true, 'A tour must have a price'],
   },
 });
 
