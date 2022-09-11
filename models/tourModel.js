@@ -5,6 +5,7 @@ const tourSchema = new mongoose.Schema({
     type: String,
     required: [true, 'A tour must have a name'],
     unique: true,
+    trim: true,
   },
   duration: {
     type: Number,
@@ -31,7 +32,7 @@ const tourSchema = new mongoose.Schema({
     required: [true, 'A tour must have a price'],
   },
   priceDiscount: Number,
-  summery: {
+  summary: {
     type: String,
     trim: true,
   },
