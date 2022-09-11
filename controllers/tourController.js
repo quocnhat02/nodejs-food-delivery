@@ -68,7 +68,7 @@ exports.updateTour = async (req, res) => {
     res.status(200).json({
       status: 'success',
       data: {
-        tour: '<Updated tour here...>',
+        tour,
       },
     });
   } catch (error) {
