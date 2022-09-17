@@ -46,8 +46,12 @@ const url = require('url');
 //////////////////////////////////////////////
 // SERVER
 const server = http.createServer((req, res) => {
-  console.log(req.url);
-  res.end('Hello from the server!');
+  const pathName = req.url;
+  if (pathName === '/overview') {
+    res.end('This is the OVERVIEW');
+  } else if (pathName === '/product') {
+    res.end('This is the PRODUCT');
+  }
 });
 
 server.listen(8000, '127.0.0.1', () => {
