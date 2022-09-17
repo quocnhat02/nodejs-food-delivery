@@ -1,0 +1,2 @@
+I am read-this.txt
+I am append.txt
