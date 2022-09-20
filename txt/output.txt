@@ -1,2 +1,0 @@
-This is what we know about the avocado: Hello i am input.txt.
-Created on 1663424909524 
