@@ -1,9 +1,16 @@
 const { readFile, writeFile } = require('fs');
 
-readFile('./content/first.txt', 'utf-8', (err, data) => {
+readFile('./content/first.txt', 'utf-8', (err, data1) => {
   if (err) {
     console.log(err);
     return;
   }
-  console.log(data);
+  const first = data1;
+  readFile('./content/second.txt', 'utf-8', (err, data2) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    const second = data2;
+  });
 });
