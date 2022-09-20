@@ -1,8 +1,8 @@
 // Modules
 
-const { john, peter } = require('./names');
+const names = require('./names');
 const { sayHi } = require('./utils');
 
 sayHi('susan');
-sayHi(john);
-sayHi(peter);
+sayHi(names.john);
+sayHi(names.peter);
