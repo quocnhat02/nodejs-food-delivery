@@ -21,6 +21,14 @@ const server = http.createServer((req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/css' });
     res.write(homeStyles);
     res.end();
+  } else if (url === '/logo.svg') {
+    res.writeHead(200, { 'Content-Type': 'image/svg+xml' });
+    res.write(homeImage);
+    res.end();
+  } else if (url === '/browser-app.js') {
+    res.writeHead(200, { 'Content-Type': 'text/javascript' });
+    res.write(homeLogic);
+    res.end();
   } else {
     res.writeHead(404, { 'Content-Type': 'text/html' });
     res.write('<h1>Page not found</h1>');
