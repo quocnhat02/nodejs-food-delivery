@@ -1,4 +1,5 @@
 const express = require('express');
+const morgan = require('morgan');
 const { logger } = require('./logger');
 const { authorize } = require('./authorize');
 
@@ -7,7 +8,8 @@ const app = express();
 // req => middleware => res
 
 // app.use([logger, authorize]);
-app.use(express.static('./public'));
+app.use(morgan('combined'));
+// app.use(express.static('./public'));
 
 // api/home/about/products
 app.get('/', (req, res) => {
@@ -22,7 +24,7 @@ app.get('/api/products', (req, res) => {
   res.send('Products');
 });
 
-app.get('/api/items', [logger, authorize], (req, res) => {
+app.get('/api/items', (req, res) => {
   console.log(req.user);
   res.send('Items');
 });
