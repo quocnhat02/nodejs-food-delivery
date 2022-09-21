@@ -1,11 +1,12 @@
 const express = require('express');
 const { logger } = require('./logger');
+const { authorize } = require('./authorize');
 
 const app = express();
 
 // req => middleware => res
 
-app.use('/api', logger);
+app.use([logger, authorize]);
 
 // api/home/about/products
 app.get('/', (req, res) => {
