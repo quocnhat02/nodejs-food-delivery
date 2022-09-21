@@ -6,7 +6,8 @@ const app = express();
 
 // req => middleware => res
 
-app.use([logger, authorize]);
+// app.use([logger, authorize]);
+app.use(express.static('./public'));
 
 // api/home/about/products
 app.get('/', (req, res) => {
@@ -21,7 +22,7 @@ app.get('/api/products', (req, res) => {
   res.send('Products');
 });
 
-app.get('/api/items', (req, res) => {
+app.get('/api/items', [logger, authorize], (req, res) => {
   console.log(req.user);
   res.send('Items');
 });
