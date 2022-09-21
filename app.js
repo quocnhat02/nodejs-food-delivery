@@ -1,5 +1,9 @@
-console.log('first');
-setTimeout(() => {
-  console.log('second');
-}, 0);
-console.log('third');
+const { readFile } = require('fs');
+
+readFile('./content/first.txt', 'utf-8', (err, data) => {
+  if (err) {
+    return;
+  } else {
+    console.log(data);
+  }
+});
