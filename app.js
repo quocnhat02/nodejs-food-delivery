@@ -3,6 +3,8 @@ const path = require('path');
 
 const app = express();
 
+app.use(express.static(path.join(__dirname, 'navbar-app')));
+
 app.get('/', (req, res) => {
   res.status(200).sendFile(path.resolve(__dirname, './navbar-app/index.html'));
 });
