@@ -5,7 +5,7 @@ const app = express();
 const { products } = require('./data');
 
 app.get('/', (req, res) => {
-  res.json(products);
+  res.send('<h1>Home page</h1><a href="/api/products">products</a>');
 });
 
 app.listen(5000, () => {
