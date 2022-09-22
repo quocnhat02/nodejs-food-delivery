@@ -40,8 +40,8 @@ app.post('/login', (req, res) => {
 app.put('/api/people/:id', (req, res) => {
   const { id } = req.params;
   const { name } = req.body;
-  console.log(id, name);
-  res.send('Hello World');
+
+  const person = people.find((person) => person.id === Number(id));
 });
 
 app.listen(5000, () => {
