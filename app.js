@@ -2,7 +2,7 @@ const express = require('express');
 
 const app = express();
 
-let { people } = require('./data');
+let people = require('./routes/people');
 
 // status assets
 app.use(express.static('./methods-public'));
@@ -10,6 +10,8 @@ app.use(express.static('./methods-public'));
 app.use(express.urlencoded({ extended: false }));
 // parse json
 app.use(express.json());
+
+app.use('/api/people', people);
 
 app.post('/login', (req, res) => {
   const { name } = req.body;
