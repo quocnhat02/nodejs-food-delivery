@@ -6,7 +6,7 @@ const {
   createPersonPostman,
   updatePerson,
   deletePerson,
-} = require('../controllers/people');
+} = require('../controllers/people.controller');
 
 const router = express.Router();
 

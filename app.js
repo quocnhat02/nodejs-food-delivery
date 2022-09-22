@@ -2,8 +2,8 @@ const express = require('express');
 
 const app = express();
 
-let people = require('./routes/people');
-let auth = require('./routes/auth');
+let people = require('./routes/people.router');
+let auth = require('./routes/auth.router');
 
 // status assets
 app.use(express.static('./methods-public'));
