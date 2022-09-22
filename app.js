@@ -25,7 +25,7 @@ app.post('/api/people', (req, res) => {
       .status(400)
       .json({ success: false, msg: 'please provide name value' });
   }
-  return res.status(201).json({ name });
+  return res.status(201).json({ success: true, person: name });
 });
 
 app.post('/login', (req, res) => {
