@@ -2,8 +2,8 @@ const express = require('express');
 
 const router = express.Router();
 
-router.route('/').get((req, res) => {
-  return res.send('all items');
-});
+const { getAllTask } = require('../controllers/tasks');
+
+router.route('/').get(getAllTask);
 
 module.exports = router;
