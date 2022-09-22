@@ -11,6 +11,15 @@ app.use(express.urlencoded({ extended: false }));
 // parse json
 app.use(express.json());
 
+app.post('/login', (req, res) => {
+  const { name } = req.body;
+  if (name) {
+    return res.status(200).send(`Welcome ${name}`);
+  }
+
+  return res.status(401).send('Please provide credentials');
+});
+
 app.get('/api/people', (req, res) => {
   res.status(200).json({
     success: true,
@@ -28,7 +37,7 @@ app.post('/api/people', (req, res) => {
   return res.status(201).json({ success: true, person: name });
 });
 
-app.post('/api/postman/people', (req, res) => {
+app.post('/api/people/postman', (req, res) => {
   const { name } = req.body;
   if (!name) {
     return res
@@ -36,15 +45,6 @@ app.post('/api/postman/people', (req, res) => {
       .json({ success: false, msg: 'please provide name value' });
   }
   return res.status(201).json({ success: true, data: [...people, name] });
-});
-
-app.post('/login', (req, res) => {
-  const { name } = req.body;
-  if (name) {
-    return res.status(200).send(`Welcome ${name}`);
-  }
-
-  return res.status(401).send('Please provide credentials');
 });
 
 app.put('/api/people/:id', (req, res) => {
