@@ -42,6 +42,19 @@ app.put('/api/people/:id', (req, res) => {
   const { name } = req.body;
 
   const person = people.find((person) => person.id === Number(id));
+
+  if (!person) {
+    return res
+      .status(404)
+      .json({ success: false, msg: `no person with id ${id}` });
+  }
+  const newPeople = people.map((person) => {
+    if (person.id === Number(id)) {
+      person.name = name;
+    }
+    return person;
+  });
+  res.status(200).json({ success: true, data: newPeople });
 });
 
 app.listen(5000, () => {
