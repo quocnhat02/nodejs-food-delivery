@@ -34,10 +34,6 @@ const getTask = async (req, res) => {
   }
 };
 
-const updateTask = (req, res) => {
-  return res.send('update task');
-};
-
 const deleteTask = async (req, res) => {
   try {
     const { id: taskID } = req.params;
@@ -48,6 +44,16 @@ const deleteTask = async (req, res) => {
     }
 
     return res.status(200).json({ task });
+  } catch (error) {
+    return res.status(500).json({ msg: error });
+  }
+};
+
+const updateTask = async (req, res) => {
+  try {
+    const { id: taskID } = req.params;
+
+    return res.status(200).json({ id: taskID, data: req.body });
   } catch (error) {
     return res.status(500).json({ msg: error });
   }
