@@ -3,7 +3,10 @@ const Task = require('../models/Task');
 const getAllTask = async (req, res) => {
   try {
     const tasks = await Task.find({});
-    return res.status(200).json({ tasks });
+    // return res.status(200).json({ tasks, amount: tasks.length });
+    return res
+      .status(200)
+      .json({ status: 'success', data: { tasks, nbHits: tasks.length } });
   } catch (error) {
     return res.status(500).json({ msg: error });
   }
