@@ -1,13 +1,13 @@
 const express = require('express');
 
-const tasks = require('./routes/tasks');
 const connectDB = require('./db/connect');
-require('dotenv').config();
+const tasks = require('./routes/tasks');
 const notFound = require('./middleware/not-found');
 const errorHandlerMiddleware = require('./middleware/error-handler');
 
 const app = express();
 
+require('dotenv').config();
 const port = process.env.PORT || 3000;
 
 // middleware
