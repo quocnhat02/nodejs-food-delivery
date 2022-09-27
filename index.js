@@ -9,9 +9,10 @@ const fs = require('fs');
 // console.log('File written!');
 
 // Non-locking, asynchronous way
-fs.readFile('./txt/start.txt', 'utf-8', (error, data) => {
-  if (error) {
-    console.log(error);
-  }
-  console.log(data);
+fs.readFile('./txt/start.txt', 'utf-8', (error, data1) => {
+  fs.readFile(`./txt/${data1}.txt`, 'utf-8', (error, data2) => {
+    console.log(data2);
+  });
 });
+
+console.log('Will read file!');
