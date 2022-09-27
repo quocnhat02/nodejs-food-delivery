@@ -9,7 +9,7 @@ const fs = require('fs');
 // console.log('File written!');
 
 // Non-locking, asynchronous way
-fs.readFile('./txt/start.txt', (error, data) => {
+fs.readFile('./txt/start.txt', 'utf-8', (error, data) => {
   if (error) {
     console.log(error);
   }
