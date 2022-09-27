@@ -52,7 +52,11 @@ const server = http.createServer((req, res) => {
   } else if (pathName === '/product') {
     return res.end('This is the PRODUCT');
   } else {
-    return res.end('Page not found!');
+    res.writeHead(404, {
+      'Content-type': 'text/html',
+      'my-own-header': 'hello-world',
+    });
+    return res.end('<h1>Page not found!</h1>');
   }
 });
 
