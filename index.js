@@ -9,4 +9,9 @@ const fs = require('fs');
 // console.log('File written!');
 
 // Non-locking, asynchronous way
-fs.readFile('./txt/start.txt');
+fs.readFile('./txt/start.txt', (error, data) => {
+  if (error) {
+    console.log(error);
+  }
+  console.log(data);
+});
