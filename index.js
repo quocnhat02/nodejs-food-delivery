@@ -10,13 +10,25 @@ const fs = require('fs');
 
 // Non-locking, asynchronous way
 fs.readFile('./txt/start.txt', 'utf-8', (error, data1) => {
+  if (error) {
+    return console.log(error);
+  }
   fs.readFile(`./txt/${data1}.txt`, 'utf-8', (error, data2) => {
+    if (error) {
+      return console.log(error);
+    }
     console.log(data2);
 
     fs.readFile('./txt/append.txt', 'utf-8', (error, data3) => {
+      if (error) {
+        return console.log(error);
+      }
       console.log(data3);
 
       fs.writeFile('./txt/final.txt', `${data2}\n${data3}`, 'utf-8', (err) => {
+        if (error) {
+          return console.log(error);
+        }
         console.log('Your file has been written');
       });
     });
