@@ -1,4 +1,5 @@
 const fs = require('fs');
+const http = require('http');
 
 // Blocking, synchronous way
 // const textIn = fs.readFileSync('./txt/input.txt', 'utf-8');
