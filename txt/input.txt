@@ -1,1 +1,0 @@
-Branch 'master-node' set up to track remote branch 'master-node' from 'origin'
