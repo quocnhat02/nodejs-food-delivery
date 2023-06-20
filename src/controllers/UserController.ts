@@ -2,9 +2,10 @@ export class UserController {
   static login(req, res, next) {
     // const data = { name: 'Nhat' };
     // res.status(200).send(data);
-    (req as any).errorStatus = 422;
-    const error = new Error('User email or password does not match');
-    next(error);
+    // (req as any).errorStatus = 422;
+    // const error = new Error('User email or password does not match');
+    // next(error);
+    res.send(req.query);
   }
 
   static test1(req, res, next) {
