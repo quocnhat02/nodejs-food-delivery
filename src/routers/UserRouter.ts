@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { UserController } from '../controllers/UserController';
 
 class UserRouter {
   public router: Router;
@@ -13,13 +14,9 @@ class UserRouter {
   }
 
   getRoutes() {
-    this.router.get('/login', (req, res) => {
-      console.log('login');
-    });
+    this.router.get('/login', UserController.login);
 
-    this.router.get('/test', (req, res) => {
-      console.log('test');
-    });
+    this.router.get('/test', UserController.test1, UserController.test2);
   }
 
   postRoutes() {}
