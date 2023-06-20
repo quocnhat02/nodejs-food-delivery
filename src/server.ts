@@ -9,6 +9,8 @@ export class Server {
   constructor() {
     this.setConfigs();
     this.setRoutes();
+    this.error404Handler();
+    this.handleErrors();
   }
 
   setConfigs() {
@@ -23,5 +25,24 @@ export class Server {
 
   setRoutes() {
     this.app.use('/api/user', UserRouter);
+  }
+
+  error404Handler() {
+    this.app.use((req, res) => {
+      res.status(404).json({
+        message: 'Not found',
+        status_code: 404,
+      });
+    });
+  }
+
+  handleErrors() {
+    this.app.use((err, req, res, next) => {
+      const errorStatus = req.errorStatus || 500;
+      res.status(errorStatus).json({
+        message: err.message || 'Something went wrong. Please try again',
+        status_code: errorStatus,
+      });
+    });
   }
 }

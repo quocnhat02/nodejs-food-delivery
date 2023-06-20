@@ -1,7 +1,10 @@
 export class UserController {
-  static login(req, res) {
-    const data = { name: 'Nhat' };
-    res.status(200).send(data);
+  static login(req, res, next) {
+    // const data = { name: 'Nhat' };
+    // res.status(200).send(data);
+    (req as any).errorStatus = 422;
+    const error = new Error('User email or password does not match');
+    next(error);
   }
 
   static test1(req, res, next) {
