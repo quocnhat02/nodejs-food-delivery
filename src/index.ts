@@ -1,9 +1,10 @@
 import * as express from 'express';
 import * as mongoose from 'mongoose';
+import { getEnvironmentVariables } from './environments/environment';
 
 let app: express.Application = express();
 
-mongoose.connect('mongodb://127.0.0.1:27017/swiggyCloneApp').then(() => {
+mongoose.connect(getEnvironmentVariables().db_uri).then(() => {
   console.log('Connected to mongodb');
 });
 
