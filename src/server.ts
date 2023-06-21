@@ -2,7 +2,7 @@ import * as express from 'express';
 import * as mongoose from 'mongoose';
 import { getEnvironmentVariables } from './environments/environment';
 import UserRouter from './routers/UserRouter';
-import bodyParser = require('body-parser');
+import * as bodyParser from 'body-parser';
 
 export class Server {
   public app: express.Application = express();
@@ -26,6 +26,7 @@ export class Server {
   }
 
   configureBodyParser() {
+    this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: true }));
   }
 
