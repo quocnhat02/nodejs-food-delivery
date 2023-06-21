@@ -1,39 +1,33 @@
 import User from '../models/User';
-import { matchedData, validationResult } from 'express-validator';
+import { matchedData, validationResult, body } from 'express-validator';
 
 export class UserController {
   static signup(req, res, next) {
     const result = validationResult(req);
 
-    const email = req.body.email;
-    const password = req.body.password;
+    if (!result.isEmpty()) {
+      next(new Error(result.array()[0].msg));
+    } else {
+      const { name, email, phone, password, type, status } = req.body;
+      const data = {
+        email,
+        password,
+        name,
+        phone,
+        type,
+        status,
+      };
 
-    if (result.isEmpty()) {
-      const data = matchedData(req);
-      return res.send(`Hello, ${data.email}!`);
+      const newUser = new User(data);
+
+      newUser
+        .save()
+        .then((user) => {
+          res.status(201).send(user);
+        })
+        .catch((err) => {
+          next(err);
+        });
     }
-
-    res.status(400).send({ errors: result.array().map((x) => x.msg) });
-
-    // const user = new User({ email, password });
-
-    // user
-    //   .save()
-    //   .then((user) => {
-    //     res.status(201).send(user);
-    //   })
-    //   .catch((err) => {
-    //     next(err);
-    //   });
-  }
-
-  static test1(req, res, next) {
-    console.log('test');
-    (req as any).msg = 'This is a test';
-    next();
-  }
-
-  static test2(req, res) {
-    res.send((req as any).msg);
   }
 }
