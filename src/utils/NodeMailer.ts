@@ -9,14 +9,14 @@ export class NodeMailer {
         auth: {
           api_key: getEnvironmentVariables().sendgrid.api_key,
         },
-      }),
-      {
-        service: 'gmail',
-        auth: {
-          user: getEnvironmentVariables().gmail_auth.user,
-          pass: getEnvironmentVariables().gmail_auth.pass,
-        },
-      }
+      })
+      //   {
+      //     service: 'gmail',
+      //     auth: {
+      //       user: getEnvironmentVariables().gmail_auth.user,
+      //       pass: getEnvironmentVariables().gmail_auth.pass,
+      //     },
+      //   }
       //   Note: https://myaccount.google.com/lesssecureapps
     );
   }
@@ -27,8 +27,8 @@ export class NodeMailer {
     html: string;
   }): Promise<any> {
     return NodeMailer.initiateTransport().sendMail({
-      //   from: getEnvironmentVariables().sendgrid.email_from,
-      from: getEnvironmentVariables().gmail_auth.user,
+      from: getEnvironmentVariables().sendgrid.email_from,
+      //   from: getEnvironmentVariables().gmail_auth.user,
       to: data.to,
       subject: data.subject,
       html: data.html,

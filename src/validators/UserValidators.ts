@@ -1,4 +1,4 @@
-import { body } from 'express-validator';
+import { body, query } from 'express-validator';
 import User from '../models/User';
 
 export class UserValidators {
@@ -24,7 +24,7 @@ export class UserValidators {
       body('password', 'Password is required')
         .isAlphanumeric()
         .isLength({ min: 8, max: 25 })
-        .withMessage('Password must be between 8-20 characters'),
+        .withMessage('Password must be between 8-25 characters'),
       body('type', 'User role  type is required').isString(),
       body('status', 'User status  type is required').isString(),
     ];
@@ -38,5 +38,13 @@ export class UserValidators {
       ).isNumeric(),
       body('email', 'Email is required').isEmail(),
     ];
+  }
+
+  static resendVerificationEmail() {
+    return [];
+  }
+
+  static verifyUserForResendEmail() {
+    return [query('email', 'Email is required').isEmail()];
   }
 }

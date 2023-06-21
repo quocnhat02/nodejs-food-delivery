@@ -1,8 +1,6 @@
 import { Router } from 'express';
 import { UserController } from '../controllers/UserController';
 import { UserValidators } from '../validators/UserValidators';
-
-import { query } from 'express-validator';
 import { GlobalMiddleware } from '../middlewares/GlobalMiddleware';
 
 class UserRouter {
@@ -17,7 +15,13 @@ class UserRouter {
     this.deleteRoutes();
   }
 
-  getRoutes() {}
+  getRoutes() {
+    this.router.get(
+      '/send/verification/email',
+      UserValidators.verifyUserForResendEmail(),
+      UserController.resendVerificationEmail
+    );
+  }
 
   postRoutes() {
     this.router.post(
