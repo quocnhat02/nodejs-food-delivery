@@ -3,6 +3,8 @@ import * as mongoose from 'mongoose';
 import { getEnvironmentVariables } from './environments/environment';
 import UserRouter from './routers/UserRouter';
 import * as bodyParser from 'body-parser';
+import * as cors from 'cors';
+import * as compression from 'compression';
 
 export class Server {
   public app: express.Application = express();
@@ -16,6 +18,8 @@ export class Server {
 
   setConfigs() {
     this.connectMongoDB();
+    this.handleCompress();
+    this.allowCors();
     this.configureBodyParser();
   }
 
@@ -28,6 +32,14 @@ export class Server {
   configureBodyParser() {
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: true }));
+  }
+
+  handleCompress() {
+    this.app.use(compression());
+  }
+
+  allowCors() {
+    this.app.use(cors());
   }
 
   setRoutes() {
