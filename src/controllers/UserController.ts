@@ -1,27 +1,14 @@
 import User from '../models/User';
 import { Utils } from '../utils/Utils';
 import { NodeMailer } from '../utils/NodeMailer';
-import * as Bcrypt from 'bcrypt';
 
 export class UserController {
-  private static encryptPassword(req, res, next) {
-    return new Promise((resolve, reject) => {
-      Bcrypt.hash(req.body.password, 10, function (err, hash) {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(hash);
-        }
-      });
-    });
-  }
-
   static async signup(req, res, next) {
-    const { name, email, phone, type, status } = req.body;
+    const { name, email, password, phone, type, status } = req.body;
     const verification_token = Utils.generateVerificationToken();
 
     try {
-      const hash = await UserController.encryptPassword(req, res, next);
+      const hash = await Utils.encryptPassword(password);
 
       const data = {
         email,
@@ -35,7 +22,17 @@ export class UserController {
       };
       const user = await new User(data).save();
 
-      res.status(201).send(user);
+      const payload = {
+        user_id: user._id,
+        email: user.email,
+      };
+
+      const token = Utils.jwtSign(payload);
+
+      res.status(201).json({
+        token,
+        user,
+      });
 
       // send email to user for verification
       await NodeMailer.sendMail({
@@ -106,6 +103,33 @@ export class UserController {
       } else {
         throw new Error(`User doesn't exist`);
       }
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async login(req, res, next) {
+    const user = req.user;
+    const { password } = req.query;
+    const data = {
+      password,
+      encrypt_password: user.password,
+    };
+
+    try {
+      await Utils.comparePassword(data);
+
+      const payload = {
+        user_id: user._id,
+        email: user.email,
+      };
+
+      const token = Utils.jwtSign(payload);
+
+      res.status(201).json({
+        token,
+        user,
+      });
     } catch (error) {
       next(error);
     }
