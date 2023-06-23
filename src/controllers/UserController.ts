@@ -1,24 +1,38 @@
 import User from '../models/User';
 import { Utils } from '../utils/Utils';
 import { NodeMailer } from '../utils/NodeMailer';
+import * as Bcrypt from 'bcrypt';
 
 export class UserController {
+  private static encryptPassword(req, res, next) {
+    return new Promise((resolve, reject) => {
+      Bcrypt.hash(req.body.password, 10, function (err, hash) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(hash);
+        }
+      });
+    });
+  }
+
   static async signup(req, res, next) {
-    const { name, email, phone, password, type, status } = req.body;
+    const { name, email, phone, type, status } = req.body;
     const verification_token = Utils.generateVerificationToken();
 
-    const data = {
-      email,
-      verification_token,
-      verification_token_time: Date.now() + new Utils().MAX_TOKEN_TIME,
-      password,
-      name,
-      phone,
-      type,
-      status,
-    };
-
     try {
+      const hash = await UserController.encryptPassword(req, res, next);
+
+      const data = {
+        email,
+        verification_token,
+        verification_token_time: Date.now() + new Utils().MAX_TOKEN_TIME,
+        password: hash,
+        name,
+        phone,
+        type,
+        status,
+      };
       const user = await new User(data).save();
 
       res.status(201).send(user);
