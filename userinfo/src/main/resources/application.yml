@@ -1,5 +1,5 @@
 server:
-  port: 9091
+  port: 9093
 
 eureka:
   client:
@@ -8,10 +8,10 @@ eureka:
 
 spring:
   application:
-    name: RESTAURANT-SERVICE
+    name: USER-SERVICE
 
   datasource:
-    url: jdbc:mysql://localhost:3306/restaurant_db
+    url: jdbc:mysql://localhost:3306/user_db
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
