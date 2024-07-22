@@ -1,6 +1,5 @@
-package com.lightcodese.foodcatalogue.dto;
+package com.lightcodese.order.dto;
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +14,5 @@ public class FoodItemDTO {
     private boolean isVeg;
     private long price;
     private Integer restaurantId;
-    @Column(nullable = false, columnDefinition = "INT DEFAULT 0")
     private Integer quantity;
 }
