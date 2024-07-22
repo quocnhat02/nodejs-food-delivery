@@ -7,20 +7,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/restaurants")
 public class RestaurantController {
     @Autowired
     RestaurantService restaurantService;
 
-    @GetMapping("/")
+    @GetMapping("/get-all")
     public ResponseEntity<List<RestaurantDTO>> getAllRestaurants() {
         List<RestaurantDTO> restaurantDTOList = restaurantService.getAllRestaurants();
         return new ResponseEntity<>(restaurantDTOList, HttpStatus.OK);
+    }
+
+    @GetMapping("/get-single-by-id/{id}")
+    public ResponseEntity<RestaurantDTO> getSingleRestaurantById(@PathVariable Integer id) {
+        return restaurantService.getSingleRestaurantById(id);
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<RestaurantDTO> postNewRestaurant(@RequestBody RestaurantDTO restaurantDTO) {
+        RestaurantDTO newRestaurantDTO = restaurantService.postNewRestaurant(restaurantDTO);
+        return new ResponseEntity<>(newRestaurantDTO, HttpStatus.CREATED);
     }
 }
